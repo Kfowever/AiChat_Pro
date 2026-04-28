@@ -1,0 +1,12 @@
+.env
+uploads/*
+!uploads/.gitkeep
+storage/*
+!storage/.gitkeep
+.trae/
+.git/
+vendor/
+node_modules/
+*.log
+.idea/
+.vscode/
