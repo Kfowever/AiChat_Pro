@@ -1,0 +1,7 @@
+* text=auto
+
+*.sh text eol=lf
+*.php text
+*.md text
+*.yml text
+*.yaml text

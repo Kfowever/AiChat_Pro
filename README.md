@@ -1,98 +1,101 @@
 # AiChat Pro
 
-一个基于 PHP 的多模型 AI 聊天系统，包含用户端聊天、套餐与额度、支付回调、后台管理、安装向导与基础安全策略。
+AiChat Pro is a self-hosted multi-model AI chat platform built with PHP and MySQL.
 
-## 功能概览
+It includes:
+- User auth and profile management
+- Multi-turn chat sessions with streaming response support
+- Model/provider management (OpenAI / Anthropic / DeepSeek)
+- File upload support
+- Plan, quota, subscription, and transaction management
+- Admin dashboard
+- Web installer for first-time setup
 
-- 用户注册、登录、JWT 鉴权、个人资料管理
-- 多轮聊天、流式回复、重试与回滚、历史导出
-- 模型管理（OpenAI / Anthropic / DeepSeek）
-- 文件上传与基础类型/大小校验
-- 套餐、订阅、额度消耗与交易记录
-- 管理后台（用户、模型、套餐、系统设置）
-- 一键安装向导（环境检测、数据库初始化、管理员创建）
+## Tech Stack
 
-## 技术栈
+- Backend: PHP 7.4+ (lightweight MVC-style structure)
+- Database: MySQL 5.7+
+- Frontend: Vanilla HTML/CSS/JS + Tailwind CDN
+- Deployment: Nginx + PHP-FPM (Docker supported)
 
-- 后端：PHP 7.4+（无重框架，轻量 MVC 结构）
-- 数据库：MySQL 5.7+
-- 前端：原生 HTML/CSS/JS（含 Tailwind CDN）
-- 部署：Nginx + PHP-FPM（支持 Docker）
-
-## 目录结构
+## Project Structure
 
 ```text
 .
-├─ app/              # 核心业务代码（Controller/Service/Model/Core）
-├─ routes/           # API 路由
-├─ config/           # 配置文件（数据库配置会在安装后生成）
-├─ sql/              # 数据库结构与初始化数据
-├─ admin/            # 后台页面
-├─ install/          # 安装向导
-├─ assets/           # 静态资源
-├─ docker/           # Docker 与 Nginx 配置
-├─ uploads/          # 上传目录（运行期）
-└─ storage/          # 运行期缓存/限流数据
++-- app/              # Controllers, services, models, and core classes
++-- routes/           # API routes
++-- config/           # App config (runtime DB config generated after install)
++-- sql/              # Database schema and seed data
++-- admin/            # Admin page
++-- install/          # Installer page and API
++-- assets/           # Static files
++-- docker/           # Docker and Nginx configs
++-- uploads/          # Runtime upload directory
+`-- storage/          # Runtime cache and rate-limit storage
 ```
 
-## 本地快速开始
+## Quick Start
 
-1. 克隆项目并进入目录
-2. 复制环境变量模板
-3. 创建数据库并确保账号可访问
-4. 启动服务
-5. 打开安装页面完成初始化
+1. Clone this repository.
+2. Copy environment template.
+3. Create a MySQL database.
+4. Start the app.
+5. Open the installer and complete setup.
 
 ```bash
 cp .env.example .env
-```
-
-```powershell
-Copy-Item .env.example .env
-```
-
-```bash
-# 方式一：PHP 内置服务
 php -S 127.0.0.1:8080
 ```
 
+Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+php -S 127.0.0.1:8080
+```
+
+Docker (optional):
+
 ```bash
-# 方式二：Docker
 docker compose -f docker/docker-compose.yml up -d --build
 ```
 
-安装入口：
-
+Installer URL:
 - `http://127.0.0.1:8080/install`
 
-## 关键环境变量
+## Environment Variables
 
-请在 `.env` 中配置以下内容：
+Set the following in `.env`:
 
 - `JWT_SECRET`
-- `DB_HOST` / `DB_PORT` / `DB_NAME` / `DB_USER` / `DB_PASS`
+- `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASS`
 - `OPENAI_API_KEY`
 - `ANTHROPIC_API_KEY`
 - `DEEPSEEK_API_KEY`
 - `APP_URL`
 
-## 安全说明
+Reference file:
+- `.env.example`
 
-- `.env`、运行期上传目录、缓存目录已加入 `.gitignore`
-- 不要提交真实 API Key、数据库密码、支付私钥
-- 生产环境务必关闭调试：`APP_DEBUG=false`
-- 建议将 `JWT_SECRET` 设为足够随机的长字符串
+## Security Baseline
 
-## API 概览
+- Never commit real secrets (`.env`, API keys, DB passwords, payment private keys)
+- Keep `APP_DEBUG=false` in production
+- Use a strong random `JWT_SECRET`
+- Rotate API keys immediately if exposed
 
-主要路由位于 `routes/api.php`，包括：
+## API Overview
 
-- `/api/auth/*` 用户认证
-- `/api/chats/*` 聊天会话与消息
-- `/api/user/*` 用户资料与账单信息
-- `/api/admin/*` 管理后台接口
-- `/api/install/*` 安装流程接口
+Core routes are defined in `routes/api.php`:
 
-## License
+- `/api/auth/*` authentication
+- `/api/chats/*` chat/session endpoints
+- `/api/user/*` profile, usage, transactions
+- `/api/admin/*` admin endpoints
+- `/api/install/*` install endpoints
 
-如需开源发布，建议补充 `LICENSE` 文件（例如 MIT）。
+## Open Source
+
+- License: MIT ([LICENSE](LICENSE))
+- Contributing guide: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Security policy: [SECURITY.md](SECURITY.md)
