@@ -1,6 +1,14 @@
 # AiChat Pro
 
+[Chinese documentation: click here](README.zh-CN.md)
+
 AiChat Pro is a self-hosted multi-model AI chat platform built with PHP and MySQL.
+
+> Important
+>
+> The payment system is not fully implemented yet and should be treated as work in progress.
+>
+> Parts of this project were generated or assisted by AI. Please review security, payment, and business logic carefully before production use.
 
 It includes:
 - User auth and profile management
@@ -37,7 +45,7 @@ It includes:
 ## Quick Start
 
 1. Clone this repository.
-2. Copy environment template.
+2. Copy the environment template.
 3. Create a MySQL database.
 4. Start the app.
 5. Open the installer and complete setup.
@@ -83,6 +91,7 @@ Reference file:
 - Keep `APP_DEBUG=false` in production
 - Use a strong random `JWT_SECRET`
 - Rotate API keys immediately if exposed
+- Review AI-generated code before public deployment
 
 ## API Overview
 
